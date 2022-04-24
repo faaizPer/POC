@@ -1,41 +1,31 @@
-package task;
-import java.io.*;
-import java.sql.*;
-public class Delete {
-	public static void main(String[] args) throws Exception	{
-		Connection con	=	null;
-		Statement	st	=	null;
-		try	{
-			con	=	DriverManager.getConnection("jdbc:mysql://localhost:3306/student","root","sV4kR5fN5");
-			System.out.println("Database Connected");
-			st	=	con.createStatement();
-			st.execute("delete from student where studentId=25 ");
-			/*
-			 * rs.next(); int id = rs.getInt("studentId"); String fnm =
-			 * rs.getString("fullName"); String lnm = rs.getString("lastName"); int dptId =
-			 * rs.getInt("departmentId"); String joinDate = rs.getString("joiningDate");
-			 * String stuDate = rs.getString("studentDob"); long mob =
-			 * rs.getLong("mobileNo"); String mail = rs.getString("email");
-			 */
-			//System.out.print(id+" "+fnm+" "+lnm+" "+dptId+" "+joinDate+" "+stuDate+" "+mob+" "+mail+" ");
-			//rs.close();
-			st.close();
-			
+package jdbc;
 
-		}
-		
-	catch	(Exception exe)	{
-		exe.printStackTrace();
-	}
-		
-		
-	/*
-	 * File file = new
-	 * File("C:\\Users\\faaiz.ali\\Downloads\\POC-Data\\deletestudent.txt");
-	 * BufferedReader br = new BufferedReader(new FileReader(file)); String str;
-	 * while((str = br.readLine()) !=null) System.out.println(str);
-	 */
-		
-	}
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
+public class delete {
+	String driver = "com.mysql.cj.jdbc.Driver";
+	static String url = "jdbc:mysql://localhost:3306/student";
+	static String username = "root";
+	static String password = "sV4kR5fN5";
+	
+   
+
+   public static void main(String[] args) {
+      // Open a connection
+      try(Connection conn = DriverManager.getConnection(url, username,password);
+         Statement stmt = conn.createStatement();
+      ) {		      
+         String sql = "DELETE FROM student " +
+            "WHERE studentId = 22";
+         stmt.executeUpdate(sql);
+         System.out.println("record deleted succesfully");
+     
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } 
+   }
 }
