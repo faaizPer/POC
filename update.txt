@@ -1,0 +1,30 @@
+package jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class update {
+	String driver = "com.mysql.cj.jdbc.Driver";
+	static String url = "jdbc:mysql://localhost:3306/student";
+	static String username = "root";
+	static String password = "sV4kR5fN5";
+	
+   
+
+   public static void main(String[] args) {
+      // Open a connection
+      try(Connection conn = DriverManager.getConnection(url, username,password);
+         Statement stmt = conn.createStatement();
+      ) {		      
+         String sql = "Update student set fullName = 'gaurav' where lastName =  'Sandra'";
+         stmt.executeUpdate(sql);
+         System.out.println("updated succefully");
+     
+      } catch (SQLException e) {
+         e.printStackTrace();
+      } 
+   }
+}
+
